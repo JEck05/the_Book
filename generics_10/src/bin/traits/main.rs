@@ -1,3 +1,5 @@
+mod traits;
+
 use std::fmt::{Debug, Display};
 
 pub struct NewsArticle {

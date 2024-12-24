@@ -27,7 +27,7 @@ impl Point<f32>{
     fn distance_from_origin(&self) -> f32{
         // distance formula x_1 = 0, y_1 = 0
         // sqrt{ (x_2 - x_1) + (y_2 - y_1) }
-        (self.x.powi(2) + self.y.powi(2)).sqrt()
+        (self.x().powi(2) + self.y.powi(2)).sqrt()
     }
 }
 
@@ -51,11 +51,11 @@ fn main() {
 
     let new_point = &origin + &offset;
 
-    println!("x is {} y is {}", origin.x, origin.y);
+    println!("x is {} y is {}", origin.x(), origin.y);
 
-    println!("x is {} y is {}", offset.x, offset.y);
+    println!("x is {} y is {}", offset.x(), offset.y);
 
-    println!("x is {} y is {}", new_point.x, new_point.y);
+    println!("x is {} y is {}", new_point.x(), new_point.y);
 
     println!("distance from origin is {}", offset.distance_from_origin());
 }

@@ -19,7 +19,7 @@ impl Config{
 
         let ignore_case = args.contains(&String::from("--ignore-case"));
 
-        let is_regex = args.contains(&String::from("--is-regex".to_string()));
+        let is_regex = args.contains(&String::from("--is-regex"));
 
         Ok(Config { query, file_path, ignore_case, is_regex })
     }

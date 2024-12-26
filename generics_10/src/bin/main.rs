@@ -45,7 +45,6 @@ fn main() {
     println!("The largest number is {}", largest);
 
 
-
     let origin = Point{ x: 1.1, y: 2.2 };
     let offset: Point<f32> = Point{ x: 2.2,y: 4.3 };
 

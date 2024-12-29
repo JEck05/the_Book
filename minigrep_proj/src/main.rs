@@ -1,5 +1,5 @@
 use std::{env, process};
-
+use minigrep_jeck as minigrep;
 use minigrep::Config;
 
 fn main() {

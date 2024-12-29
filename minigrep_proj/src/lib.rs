@@ -6,7 +6,7 @@
 use std::error::Error;
 use std::fs;
 use regex::Regex;
-/// A data type that holds command line arguments to be used in a search.
+/// A data type that holds command line arguments,
 /// 
 /// This struct is used for [`minigrep::run()`](run()) see its documentation for more.
 ///
@@ -30,7 +30,7 @@ impl Config{
     /// Basic Example using Command Line Arguments 
     /// ```rust
     /// use std::{env, process};
-    /// use minigrep::Config;
+    /// use minigrep_jeck::Config;
     ///
     /// let vec1: Vec<String> = vec![
     ///                 "./minigrep.exe".to_string(),
@@ -88,7 +88,7 @@ impl Config{
 /// Basic Example with Command Line arguments 
 /// ```rust
 /// use std::{env, process};
-/// use minigrep::Config;
+/// use minigrep_jeck::Config;
 /// 
 /// let vec1: Vec<String> = vec![
 ///                 "./minigrep.exe".to_string(),
@@ -100,7 +100,7 @@ impl Config{
 /// let config = Config::build(vec1.into_iter()).unwrap();
 /// 
 /// // Note if homework.txt isn't a valid file this will throw an error 
-/// if let Err(e) = minigrep::run(config) { 
+/// if let Err(e) = minigrep_jeck::run(config) {
 ///     eprintln!("Application Error: {e}"); 
 /// }
 /// ```

@@ -9,28 +9,81 @@ It should be noted that I extended the basic I/O project to include Regex search
 [Library documentation with examples](https://docs.rs/minigrep_jeck/0.1.0).
 
 ### **Usage**
-To bring this crate into scope, either add `minigrep_jeck@0.1.1` to your dependencies in `cargo.toml`, or run `cargo install minigrep_jeck@0.1.1`.
+To bring this crate into scope, either add `minigrep_jeck@0.1.1` to your dependencies in `cargo.toml`, or run `cargo add minigrep_jeck`.
 
-Here is an example that creates a new Rust project, adds a dependency on minigrep_jeck@0.1.1, creates the source code and a poem to search with a query.
+Here is an example that creates a new Rust project, adds minigrep_jeck, and creates the source code to search a poem with a query.
+
+First, create a new directory and create a new cargo instance:
+```bash
+$ mkdir minigrep_jeck_example
+$ cd minigrep_jeck_example
+$ cargo init
+```
+Second, add `minigrep_jeck` to dependancies
+```bash
+$ cargo add minigrep_jeck
+```
+Third, create a new text document in current directory, this is the file we are going to search.
+```bash
+$ touch shakespeare.txt
+```
+Next, Input into the file what you want to search for a query, in this case I used `Shakespeare's Sonnet 18`
+
+In shakespeare.txt:
+```text
+Shall I compare thee to a summer’s day?
+Thou art more lovely and more temperate.
+Rough winds do shake the darling buds of May,
+And summer’s lease hath all too short a date.
+Sometime too hot the eye of heaven shines,
+And often is his gold complexion dimmed;
+And every fair from fair sometime declines,
+By chance, or nature’s changing course, untrimmed;
+But thy eternal summer shall not fade,
+Nor lose possession of that fair thou ow’st,
+Nor shall death brag thou wand’rest in his shade,
+When in eternal lines to Time thou grow’st.
+So long as men can breathe, or eyes can see,
+So long lives this, and this gives life to thee.
+```
+
+Then, go to `src/main.txt`. Replace the contents with:
 
 ```rust
 use std::{env, process};
 use minigrep_jeck::Config;
-// If you were calling this from the command line it would look like
-// cargo run -- "P" "homework.txt" --ignore-case
-let vec1: Vec<String> = vec![
-                "./minigrep.exe".to_string(),
-                "P".to_string(),
-                "homework.txt".to_string(),
-                "--ignore-case".to_string()
-];
 
-let config = Config::build(vec1.into_iter()).unwrap_or_else(|err| { 
-    eprintln!("Problem parsing Arguments: {err}");
-    process::exit(1)}
-);
+fn main(){
+    let config = Config::build(env::args()).unwrap_or_else(
+        |err|{ 
+            eprintln!("Problem parsing Arguments: {err}");
+            process::exit(1)
+        }
+    );
 
-if let Err(e) = minigrep_jeck::run(config) {
-    eprintln!("Application Error: {e}"); 
+    if let Err(e) = minigrep_jeck::run(config) {
+        eprintln!("Application Error: {e}");
+        process::exit(1);
+    }
 }
 ```
+Finally, run it with `cargo run -- "thou" "shakespeare.txt"`:
+```
+$ cargo run -- "thou" "shakespeare.txt"
+   Compiling memchr v2.7.4
+   Compiling regex-syntax v0.8.5
+   Compiling aho-corasick v1.1.3                                                                                                                                                   
+   Compiling regex-automata v0.4.9                                                                                                                                                 
+   Compiling regex v1.11.1                                                                                                                                                         
+   Compiling minigrep_jeck v0.1.0                                                                                                                                                  
+   Compiling minigrep_jeck_example v0.1.0 (C:\Users\James\RustroverProjects\minigrep_jeck_example)                                                                                 
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 7.43s                                                                                                            
+     Running `target\debug\minigrep_jeck_example.exe thou shakespeare.txt`
+Nor lose possession of that fair thou ow’st,
+Nor shall death brag thou wand’rest in his shade,
+When in eternal lines to Time thou grow’st.
+```
+This returns lines that only match "`thou`", this is case-sensitive. To run it case-insensitive run with the flag "`--ignore-case`".
+
+Also you could use a regex string with the flag "`--is-regex`".
+

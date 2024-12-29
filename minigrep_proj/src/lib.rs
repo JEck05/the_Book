@@ -6,7 +6,7 @@
 use std::error::Error;
 use std::fs;
 use regex::Regex;
-/// A complex data type, used to run a grep like search.  
+/// A data type that holds command line arguments to be used in a search.
 /// 
 /// This struct is used for [`minigrep::run()`](run()) see its documentation for more.
 ///
@@ -137,19 +137,8 @@ pub fn run(config: Config) -> Result<(), Box<dyn Error>> {
 /// 
 /// Searches a &str line by line and filters based
 /// on the given closure
-/// 
-/// # Examples 
-/// ```rust 
-///     let query = "P";
-///     let contents = "\
-///Rust:
-///safe, fast, productive.
-///Pick three.";
-///     assert_eq!(
-///         vec!["safe, fast, productive.", "Pick three."],
-///         search(contents, |lines| lines.to_lowercase().contains(&query.to_lowercase()))
-///     );
-/// ```
+
+
 fn search<P>(contents: &str, predicate: P) -> Vec<&str>
 where
     P: Fn(&str) -> bool

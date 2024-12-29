@@ -1,6 +1,6 @@
 [package]
 name = "minigrep_jeck"
-version = "0.1.0"
+version = "0.1.1"
 edition = "2021"
 description = "`minigrep` is a grep clone that takes a query and searches for the query in the file; with added support for regex."
 license = "MIT"

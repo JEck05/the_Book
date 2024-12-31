@@ -1,5 +1,5 @@
 
-# All valid cargo installs have a Cargo.toml file so to determine
+# All valid cargo installs have a target directory so to determine
 # if we can clean the directory we can check that it has this file
 $cargoPath = "/target"
 # Get a list of directories in the current location and run a command on each
